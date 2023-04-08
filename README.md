@@ -1,3 +1,4 @@
 # DXF-to-PLY-converter
 
-### awk -f my_script.awk input_file.txt
+### running file  
+awk -f dxf-ply.awk input.DXF  

@@ -2,10 +2,12 @@
 
 BEGIN {
     # Initialization code goes here
+    FS=","
 }
 
 {
     # Main processing code goes here
+    print $1
 }
 
 END {
