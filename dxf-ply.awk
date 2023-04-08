@@ -2,6 +2,8 @@
 
 BEGIN {
     # Initialization code goes here
+    vertices=0
+    faces=0
     FS=","
 }
 
