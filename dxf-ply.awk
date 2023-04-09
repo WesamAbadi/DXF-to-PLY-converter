@@ -2,14 +2,14 @@
 
 BEGIN {
     # Initialization code goes here
-    vertices=0
-    faces=0
-    FS=","
+    RS = "\n";
+    FS = " ";
+    print "Initial testing";
 }
 
 {
     # Main processing code goes here
-    print $1
+    print $1;
 }
 
 END {

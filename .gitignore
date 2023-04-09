@@ -1,3 +1,4 @@
-output.ply
+output*
+test*
 sample.ply
-test.awk
+error.log
