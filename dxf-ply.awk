@@ -23,12 +23,80 @@ BEGIN {
         #if the line starts with 3DFACE:    
 $1 == "3DFACE" {
     #-------adding 1face & 4verticies if a face is found cuz a face is 4 verticies.
-    verticies=verticies+4
-    faces=faces+1
+    # verticies=verticies+4
+    # faces=faces+1
+    face_verticies=0;
+     #------print the line for testing.
+        print "----"$1
+
+        #--------skipping the layer id.
+        getline
+        getline
+        getline
+
+        #------checks for the initial and final verticies of the line.
+        if ($1 == "10") { 
+            face_verticies++;
+            getline 
+            x1 = $1 }
+        getline
+        if ($1 == "20") { 
+            getline
+            y1 = $1 }
+        getline
+        if ($1 == "30") { 
+            getline
+            z1 = $1 }
+        getline
+        if ($1 == "11") { 
+            face_verticies++
+            getline
+            x2 = $1 }
+        getline
+        if ($1 == "21") { 
+            getline
+            y2 = $1 }
+        getline
+        if ($1 == "31") { 
+            getline
+            z2 = $1 }
+        getline
+        if ($1 == "12") { 
+            face_verticies++
+            getline
+            x3 = $1 }
+        getline
+        if ($1 == "22") { 
+            getline
+            y3 = $1 }
+        getline
+        if ($1 == "32") { 
+            getline
+            z3 = $1 }
+        getline
+        if ($1 == "13") { 
+            face_verticies++
+            getline
+            x4 = $1 }
+        getline
+        if ($1 == "23") { 
+            getline
+            y4 = $1 }
+        getline
+        if ($1 == "33") { 
+            getline
+            z4 = $1 }
+
+        print x1, y1, z1
+        print x2, y2, z2
+        print x3, y3, z3
+if(face_verticies==4){
+        print x4, y4, z4
+
+}
     #-----print the line for testing.
-    print "----"$1
-    next
-    printf("4 %d %d %d %d\n \n", verticies-4, verticies-3, verticies-2, verticies-1)
+
+    printf("FACES IS:: %d %d %d %d\n \n",face_verticies, face_verticies-4, face_verticies-3, face_verticies-2, face_verticies-1)
 
     }
         #-------if the line starts with LINE:    
@@ -74,6 +142,7 @@ $1 == "3DFACE" {
     }
         #if the line starts with VERTICES/POINT:     
     $1 == "VERTEX" || $1 == "POINT"{
+        skipping =true
         #print the line for testing.
         print "----"$1
         #--------skipping the layer id.
