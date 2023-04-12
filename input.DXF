@@ -6,6 +6,8 @@ ENTITIES
 POLYLINE
   0
 VERTEX
+  8
+0
  10
 1.0
  20
@@ -14,6 +16,8 @@ VERTEX
 0.0
   0
 VERTEX
+  8
+0
  10
 2.0
  20
@@ -22,6 +26,8 @@ VERTEX
 0.0
   0
 VERTEX
+  8
+0
  10
 2.0
  20
@@ -30,6 +36,8 @@ VERTEX
 0.0
   0
 VERTEX
+  8
+0
  10
 1.0
  20
