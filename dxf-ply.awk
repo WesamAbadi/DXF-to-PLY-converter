@@ -21,128 +21,25 @@ BEGIN {
     # -------Main processing code goes here
 
         #if the line starts with 3DFACE:    
-$1 == "3DFACE" {
-    #-------adding 1face & 4verticies if a face is found cuz a face is 4 verticies.
-    # verticies=verticies+4
-    # faces=faces+1
-    face_verticies=0;
-     #------print the line for testing.
-        print "----"$1
-
-        #--------skipping the layer id.
-        getline
-        getline
-        getline
-
-        #------checks for the initial and final verticies of the line.
-        if ($1 == "10") { 
-            face_verticies++;
-            getline 
-            x1 = $1 }
-        getline
-        if ($1 == "20") { 
-            getline
-            y1 = $1 }
-        getline
-        if ($1 == "30") { 
-            getline
-            z1 = $1 }
-        getline
-        if ($1 == "11") { 
-            face_verticies++
-            getline
-            x2 = $1 }
-        getline
-        if ($1 == "21") { 
-            getline
-            y2 = $1 }
-        getline
-        if ($1 == "31") { 
-            getline
-            z2 = $1 }
-        getline
-        if ($1 == "12") { 
-            face_verticies++
-            getline
-            x3 = $1 }
-        getline
-        if ($1 == "22") { 
-            getline
-            y3 = $1 }
-        getline
-        if ($1 == "32") { 
-            getline
-            z3 = $1 }
-        getline
-        if ($1 == "13") { 
-            face_verticies++
-            getline
-            x4 = $1 }
-        getline
-        if ($1 == "23") { 
-            getline
-            y4 = $1 }
-        getline
-        if ($1 == "33") { 
-            getline
-            z4 = $1 }
-
-        print x1, y1, z1
-        print x2, y2, z2
-        print x3, y3, z3
-if(face_verticies==4){
-        print x4, y4, z4
-
-}
-    #-----print the line for testing.
-
-    printf("FACES IS:: %d %d %d %d\n \n",face_verticies, face_verticies-4, face_verticies-3, face_verticies-2, face_verticies-1)
-
-    }
+  #-----print the line for testing.
+    
         #-------if the line starts with LINE:    
-    $1 == "LINE" {
-        #------print the line for testing.
-        print "----"$1
+  {
 
-        #--------skipping the layer id.
-        getline
-        getline
-        getline
+    if($1 == "VERTEX" || $1 == "POINT" || $1 == "LINE" || $1 == "3DFACE"){
+        print "\n"
+        skipping =1
+        face_verticies=0;
+        aFACE = 0
+        if($1 == "3DFACE"){
+            aFACE = 1
+            print "I AM A FACE"
+        }
+        else {
+            aFACE = 0
+            print "I AM NOT"
+        }
 
-        #------checks for the initial and final verticies of the line.
-        if ($1 == "10") { 
-            getline 
-            x1 = $1 }
-        getline
-        if ($1 == "20") { 
-            getline
-            y1 = $1 }
-        getline
-        if ($1 == "30") { 
-            getline
-            z1 = $1 }
-        getline
-        if ($1 == "11") { 
-            getline
-            x2 = $1 }
-        getline
-        if ($1 == "21") { 
-            getline
-            y2 = $1 }
-        getline
-        if ($1 == "31") { 
-            getline
-            z2 = $1 }
-
-        print x1, y1, z1
-        print x2, y2, z2
-        # print "2 " ++vertex_count " " ++vertex_count+1
-        # ++edge_count
-
-    }
-        #if the line starts with VERTICES/POINT:     
-    $1 == "VERTEX" || $1 == "POINT"{
-        skipping =true
         #print the line for testing.
         print "----"$1
         #--------skipping the layer id.
@@ -164,7 +61,7 @@ if(face_verticies==4){
             z1 = $1 }
         getline
         if ($1 == "11") { 
-            skipping = false
+            skipping = 0
             getline
             x2 = $1 
         getline
@@ -177,23 +74,59 @@ if(face_verticies==4){
         if ($1 == "31") { 
             getline
             z2 = $1 }
+            getline
 
-        print x1, y1, z1
-        if (skipping){
-        print x2, y2, z2
-            
+        if ($1 == "12") { 
+            getline
+            x3= $1
+            getline
+        }
+        if ($1 == "22") { 
+            getline
+            y3= $1
+            getline
+        }
+        if ($1 == "32") { 
+            getline
+            z3= $1
+            getline
+        }
+        if ($1 == "13") { 
+            getline
+            x4= $1
+            getline
+        }
+        if ($1 == "23") { 
+            getline
+            y4= $1
+            getline
+        }
+        if ($1 == "33") { 
+            getline
+            z4= $1
+            getline
         }
 
-        
-    }
-   
-        #if the line starts with CIRCLE:    
-    $1 == "CIRCILE" {
-        #print the line for testing.
-        print $1
-    }
+
+            
 
 
+
+        print x1, y1, z1
+        if (!skipping)
+        print x2, y2, z2
+
+
+        if(aFACE){
+
+        print x3, y3, z3
+        print x4, y4, z4
+        }
+
+        print "\n"
+
+  }    
+  }
 END {
     #---------- Cleanup code goes here
     #print "element vertex", vertex_count+2
