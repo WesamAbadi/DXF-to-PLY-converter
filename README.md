@@ -1,6 +1,6 @@
 # DXF-to-PLY-converter  
 
-### Running Command:  
+## Running Command:  
 ``awk -f dxf-ply.awk input.dxf > output.ply 2> error.log``    
 
 
@@ -20,8 +20,8 @@ eg:
 (0.0, 0.0, 1.0) -> 3 * 3 + 2 = 11
 ```
 
-## SOURCES:  
 ---------------------------
+## SOURCES:  
 #### The PLY Polygon File Format:  
 
 https://web.archive.org/web/20161204152348/http://www.dcs.ed.ac.uk/teaching/cs4/www/graphics/Web/ply.html  

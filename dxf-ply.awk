@@ -11,6 +11,7 @@ BEGIN {
     print "property float y"
     print "property float z"
     print "element face 0"
+    print 
     print "property int vertex1"
     print "property int vertex2"
     print "property list uchar int vertex_index"
@@ -18,115 +19,124 @@ BEGIN {
     verticies=0
     faces=0
 }
-    # -------Main processing code goes here
-
-        #if the line starts with 3DFACE:    
-  #-----print the line for testing.
     
-        #-------if the line starts with LINE:    
-  {
+{
 
     if($1 == "VERTEX" || $1 == "POINT" || $1 == "LINE" || $1 == "3DFACE"){
         print "\n"
         skipping =1
-        face_verticies=0;
+        face_verticies = 2
         aFACE = 0
-        if($1 == "3DFACE"){
-            aFACE = 1
-            print "I AM A FACE"
-        }
-        else {
-            aFACE = 0
-            print "I AM NOT"
-        }
+        
 
-        #print the line for testing.
-        print "----"$1
-        #--------skipping the layer id.
+    if ($1 == "3DFACE")
+        aFACE = 1
+        faces++
+
+    
+
+    print "----" $1
+
+
+    getline
+    getline
+    getline
+
+    if ($1 == "10") {
         getline
+        x[1] = $1
         getline
+    }
+    if ($1 == "20") {
         getline
-
-        #------checks for the initial and final verticies of the line.
-        if ($1 == "10") { 
-            getline 
-            x1 = $1 }
+        y[1] = $1
         getline
-        if ($1 == "20") { 
-            getline
-            y1 = $1 }
+    }
+    if ($1 == "30") {
         getline
-        if ($1 == "30") { 
-            getline
-            z1 = $1 }
+        z[1] = $1
         getline
-        if ($1 == "11") { 
-            skipping = 0
-            getline
-            x2 = $1 
+    }
+    if ($1 == "11") {
+        skipping = 0
         getline
-            }
-        if ($1 == "21") { 
-            getline
-            y2 = $1 
+        x[2] = $1
         getline
-            }
-        if ($1 == "31") { 
-            getline
-            z2 = $1 }
-            getline
-
-        if ($1 == "12") { 
-            getline
-            x3= $1
-            getline
-        }
-        if ($1 == "22") { 
-            getline
-            y3= $1
-            getline
-        }
-        if ($1 == "32") { 
-            getline
-            z3= $1
-            getline
-        }
-        if ($1 == "13") { 
-            getline
-            x4= $1
-            getline
-        }
-        if ($1 == "23") { 
-            getline
-            y4= $1
-            getline
-        }
-        if ($1 == "33") { 
-            getline
-            z4= $1
-            getline
-        }
-
-
-            
-
-
-
-        print x1, y1, z1
-        if (!skipping)
-        print x2, y2, z2
+    }
+    if ($1 == "21") {
+        getline
+        y[2] = $1
+        getline
+    }
+    if ($1 == "31") {
+        getline
+        z[2] = $1
+        getline
+    }
+    if ($1 == "12") {
+        face_verticies++
+        getline
+        x[3] = $1
+        getline
+    }
+    if ($1 == "22") {
+        getline
+        y[3] = $1
+        getline
+    }
+    if ($1 == "32") {
+        getline
+        z[3] = $1
+        getline
+    }
+    if ($1 == "13") {
+        face_verticies++
+        getline
+        x[4] = $1
+        getline
+    }
+    if ($1 == "23") {
+        getline
+        y[4] = $1
+        getline
+    }
+    if ($1 == "33") {
+        getline
+        z[4] = $1
+        getline
+    }
 
 
-        if(aFACE){
 
-        print x3, y3, z3
-        print x4, y4, z4
-        }
 
-        print "\n"
 
-  }    
-  }
+    if (aFACE) {
+        for (i = 0; i <= face_verticies; i++) {
+        print x[i], y[i], z[i]
+    }
+
+        # for (i = 0; i < face_verticies; i++) {
+        #     print "at" i+1 " : "
+        #     if (y[i]!=0 && z[i]=0)
+        #         print i* 3 + 1
+        # else if (z[i]!=0){
+        #         print i* 3 + 2
+        # }
+        # else 
+        # print i * 3 + 0
+        #index [i] = i* 3 + (i-1);
+    #}
+    #index = coordinate_index * dimensions + coordinate_dimension
+    print face_verticies, face_verticies-1, face_verticies-2, face_verticies-3
+
+}
+    else {
+        print x[1], y[1], z[1]
+    if (!skipping)
+        print x[2], y[2], z[2]
+    }
+}
+}
 END {
     #---------- Cleanup code goes here
     #print "element vertex", vertex_count+2
