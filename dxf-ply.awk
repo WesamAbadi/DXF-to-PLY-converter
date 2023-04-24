@@ -19,7 +19,7 @@ BEGIN {
     verticies=0
     faces=0
 }
-    
+
 {
 
     if($1 == "VERTEX" || $1 == "POINT" || $1 == "LINE" || $1 == "3DFACE"){
@@ -115,6 +115,11 @@ BEGIN {
         print x[i], y[i], z[i]
     }
 
+    if(faces ==3)
+        print (face_verticies, face_verticies-3, face_verticies-2, face_verticies-1)
+    else
+        print (face_verticies, face_verticies-4, face_verticies-3, face_verticies-2, face_verticies-1)
+
         # for (i = 0; i < face_verticies; i++) {
         #     print "at" i+1 " : "
         #     if (y[i]!=0 && z[i]=0)
@@ -127,7 +132,7 @@ BEGIN {
         #index [i] = i* 3 + (i-1);
     #}
     #index = coordinate_index * dimensions + coordinate_dimension
-    print face_verticies, face_verticies-1, face_verticies-2, face_verticies-3
+    #print face_verticies, face_verticies-1, face_verticies-2, face_verticies-3
 
 }
     else {
