@@ -13,28 +13,28 @@ BEGIN {
     print "property list uchar int vertex_index"
     print "end_header"
     printf "\n"  
-    verticies=0  #initialize the vertex count to 0
-    faces=0  #initialize the face count to 0
+    verticies=0 #initialize the vertex count to 0
+    faces=0     #initialize the face count to 0
 }
 
 #process each line of the input file
 {
     #check if the line contains a keyword for a new object of a DXF file.
     if ($1 ~ /^(VERTEX|POINT|LINE|3DFACE)$/) {
-        skipping =1 #flag to indicate whether to skip the next line...
-                    #we skip incase we don't have anymore vertices/indices to read.
+        skipping =1         #flag to indicate whether to skip the next line...
+                            #we skip incase we don't have anymore vertices/indices to read.
 
         face_verticies = 2  #number of vertices in the current face (initialized to 2)
-        aFACE = 0  #flag to indicate whether the current object is a 3DFACE
+        aFACE = 0           #flag to indicate whether the current object is a 3DFACE
         
-        #if it's a 3DFACE, set the flag and increment the face count
+                            #if it's a 3DFACE, set the flag and increment the face count
         if ($1 ~ /^(3DFACE)$/) {
             aFACE = 1
             faces++
         }
         
-        #read the x, y, and z coordinates of the file's vertex.
-        #we skip lines here with(getline) to avoid the section and layer num. 
+                            #read the x, y, and z coordinates of the file's vertex.
+                            #we skip lines here with(getline) to avoid the section and layer num. 
         getline
         getline
         getline
@@ -54,7 +54,7 @@ BEGIN {
             getline
         }
         if ($1 ~ /^ *11 *$/) {
-            skipping = 0  #reset the skipping flag.
+            skipping = 0    #reset the skipping flag.
             getline
             x[2] = $1
             getline
