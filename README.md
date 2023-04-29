@@ -24,8 +24,8 @@ eg:
 ## SOURCES:  
 #### The PLY Polygon File Format:  
 
-https://web.archive.org/web/20161204152348/http://www.dcs.ed.ac.uk/teaching/cs4/www/graphics/Web/ply.html  
-http://paulbourke.net/dataformats/ply/ 
+https://web.archive.org/web/20161204152348/http://www.dcs.ed.ac.uk/teaching/cs4/www/graphics/Web/ply.html   
+http://paulbourke.net/dataformats/ply/   
 https://brainder.org/tag/ply/   
 
 #### DXF:  
