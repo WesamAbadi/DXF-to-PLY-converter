@@ -34,7 +34,8 @@ BEGIN {
         }
         
                             #read the x, y, and z coordinates of the file's vertex.
-                            #we skip lines here with(getline) to avoid the section and layer num. 
+                            #we skip lines here with(getline) to avoid the section and layer num.
+                            #note: next skips the next record, while getline reads it.
         getline
         getline
         getline
