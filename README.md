@@ -7,7 +7,11 @@
 ## Logic:  
 
 ##### Excracting x, y & z coordinates:  
-
+```  
+ x1:10, y1:20, z1:30;
+ x2:11, y2:21, z2:31;
+ x3:12, y3:22, z3:32;
+```  
 
 
 ##### Calcuating the indices of a face from a set of coordinates:  
@@ -37,6 +41,6 @@ https://www.fileformat.info/format/dxf/egff.htm
 
 
 #### Useful tools:  
-https://products.aspose.app/3d/conversion/dxf-to-ply  
+Online converter: https://products.aspose.app/3d/conversion/dxf-to-ply  
 FreeCAD: https://github.com/FreeCAD/FreeCAD  
 meshlab: https://github.com/cnr-isti-vclab/meshlab  
