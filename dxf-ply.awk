@@ -95,31 +95,28 @@ BEGIN {
             getline
         }
         
-
-
-
-    if (aFACE) {
+        if (aFACE) {
         #print the face's verticies information.
-        for (i = 1; i <= face_verticies; i++) {
-        #print x[i], y[i], z[i]
-        face = face x[i] " " y[i] " " z[i] "\n"
-    }
-        #indicy = face_verticies
-    for (i = face_verticies; i >= 1; i--){
-        indicy = indicy  i " "
-    }
-        indicy =  indicy "\n"
-    }
+            for (i = 1; i <= face_verticies; i++) {
+            face = face x[i] " " y[i] " " z[i] "\n"
+            vertex_count++
+        }
+            for (i = face_verticies; i >= 1; i--){
+            indicy = indicy  i " "
+        }
+            indicy =  indicy "\n"
+        }
 
-    else {
+        else {
         #if not a face, print the object's verticies.
-        #print x[1], y[1], z[1]
-        object = object x[1] " " y[1] " " z[1] "\n"
-    if (!skipping)
-        #print x[2], y[2], z[2]
-        object = object x[2] " " y[2] " " z[2] "\n"
+            object = object x[1] " " y[1] " " z[1] "\n"
+            vertex_count++
+            if (!skipping){
+            object = object x[2] " " y[2] " " z[2] "\n"
+            vertex_count++
+            }
+        }
     }
-}
 
 }
 
@@ -127,12 +124,11 @@ END{
     #print the PLY file header
     print "ply"  
     print "format ascii 1.0"
-    print "element vertex 0"
+    print "element vertex "vertex_count
     print "property float x"
     print "property float y"
     print "property float z"
     print "element face " faces
-    print "element points " face_verticies
     print "property list uchar int vertex_index"
     print "end_header \n"
     printf object
