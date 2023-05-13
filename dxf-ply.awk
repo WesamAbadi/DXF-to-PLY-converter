@@ -7,7 +7,7 @@ BEGIN {
     faces=0     #initialize the face count to 0
     face = ""
     object = ""
-    indicy = ""
+    indices = ""
 }
 
     #process each line of the input file
@@ -102,9 +102,9 @@ BEGIN {
             vertex_count++
         }
             for (i = face_verticies; i >= 1; i--){
-            indicy = indicy  i " "
+            indices = indices  i " "
         }
-            indicy =  indicy "\n"
+            indices =  indices "\n"
         }
 
         else {
@@ -133,6 +133,6 @@ END{
     print "end_header \n"
     printf object
     printf face
-    print indicy
+    print indices
 }
 
