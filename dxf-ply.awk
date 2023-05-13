@@ -1,23 +1,16 @@
 #!/bin/awk -f
 
-#BEGIN, execute once at the beginning of the program.
+    #BEGIN, execute once at the beginning of the program.
 BEGIN {
     RS = "\n"  #set record separator to newline
-    print "ply"  #print the PLY file header
-    print "format ascii 1.0"
-    print "element vertex 0"
-    print "property float x"
-    print "property float y"
-    print "property float z"
-    print "element face 0"
-    print "property list uchar int vertex_index"
-    print "end_header"
-    printf "\n"  
     verticies=0 #initialize the vertex count to 0
     faces=0     #initialize the face count to 0
+    face = ""
+    object = ""
+    indicy = ""
 }
 
-#process each line of the input file
+    #process each line of the input file
 {
     #check if the line contains a keyword for a new object of a DXF file.
     if ($1 ~ /^(VERTEX|POINT|LINE|3DFACE)$/) {
@@ -32,7 +25,6 @@ BEGIN {
             aFACE = 1
             faces++
         }
-        
                             #read the x, y, and z coordinates of the file's vertex.
                             #we skip lines here with(getline) to avoid the section and layer num.
                             #note: next skips the next record, while getline reads it.
@@ -108,21 +100,43 @@ BEGIN {
 
     if (aFACE) {
         #print the face's verticies information.
-        for (i = 0; i <= face_verticies; i++) {
-        print x[i], y[i], z[i]
+        for (i = 1; i <= face_verticies; i++) {
+        #print x[i], y[i], z[i]
+        face = face x[i] " " y[i] " " z[i] "\n"
     }
-    if(faces ==3)
-    #print the faces information.
-        print (face_verticies, face_verticies-3, face_verticies-2, face_verticies-1)
-    else
-        print (face_verticies, face_verticies-4, face_verticies-3, face_verticies-2, face_verticies-1)
-}
+        #indicy = face_verticies
+    for (i = face_verticies; i >= 1; i--){
+        indicy = indicy  i " "
+    }
+        indicy =  indicy "\n"
+    }
+
     else {
         #if not a face, print the object's verticies.
-        print x[1], y[1], z[1]
+        #print x[1], y[1], z[1]
+        object = object x[1] " " y[1] " " z[1] "\n"
     if (!skipping)
-        print x[2], y[2], z[2]
+        #print x[2], y[2], z[2]
+        object = object x[2] " " y[2] " " z[2] "\n"
     }
 }
+
+}
+
+END{
+    #print the PLY file header
+    print "ply"  
+    print "format ascii 1.0"
+    print "element vertex 0"
+    print "property float x"
+    print "property float y"
+    print "property float z"
+    print "element face " faces
+    print "element points " face_verticies
+    print "property list uchar int vertex_index"
+    print "end_header \n"
+    printf object
+    printf face
+    print indicy
 }
 
